@@ -1,6 +1,7 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Customers from './Components/Customers'
 import Form from './Components/Form'
 import axios from 'axios'
 
@@ -20,23 +21,12 @@ const App = () => {
 	
 	console.log(state.customers)
 
-	const customerList = () => state.customers.map( (customer) => {
-		return (
-			<div key={customer.id}>
-			<li>{customer.FirstName} {customer.LastName}</li>
-			<p>{customer.Phone}</p>
-			</div>
-		)
-	})
-
   	return (
     		<div className="App">
       			<header className="App-header">
         			<img src={logo} className="App-logo" alt="logo" />
         			<Form />
-					<div className='customers'>
-						{customerList()}
-					</div>	
+					<Customers state={state}/>
       			</header>
     		</div>
   );

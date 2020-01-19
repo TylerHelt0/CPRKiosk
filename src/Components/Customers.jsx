@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-const Customers = ({state}) => {
+const Customers = ({ state }) => {
 
-    const customerList = () => state.customers.map( (customer) => {
+	const customerList = () => state.customers.map((customer) => {
 		return (
 			<div key={customer.id}>
-			<li>{customer.FirstName} {customer.LastName}</li>
-			<p>{customer.Phone}</p>
+				<li>{customer.FirstName} {customer.LastName}</li>
+				<p>{customer.Phone}</p>
 			</div>
 		)
 	})
 
-    return(
-        <div className='customers'>
+	return (
+		<div className='customers'>
 			{customerList()}
-		</div>	
-    )
+		</div>
+	)
 }
 
 export default Customers

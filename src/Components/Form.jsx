@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Redirect} from 'react-router-dom'
 import Axios from 'axios'
 import '../App.css'
 
@@ -24,9 +25,6 @@ const Form = () => {
 	
     const handleSumbit = ()=>{
         Axios.post('http://71.150.156.98:1337/customers/',postData)
-        .then((res)=>{
- 
-        })
     }
 
 	return(

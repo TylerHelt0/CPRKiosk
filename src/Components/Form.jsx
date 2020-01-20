@@ -24,7 +24,7 @@ const Form = () => {
     }
 
     const handleSumbit = () => {
-        Axios.post('http://71.150.156.98:1337/customers/', postData)
+        Axios.post('http://localhost:1337/customers/', postData)
         .then((res)=>{
 
         })

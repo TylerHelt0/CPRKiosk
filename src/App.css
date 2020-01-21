@@ -37,8 +37,8 @@
   }
 }
 
-.form form{
-  display:flex;
+.customer-form form {
+  display: flex;
   flex-direction: column;
 }
 

@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import '../App.css'
 
-const Form = () => {
+const Form = ({state,setState}) => {
 
-    const [data, setData] = useState({
-        firstName: '',
-        lastName: '',
-        phoneType: 'Samsung',
-        phoneNumber: ''
-    })
-
-    const postData = {
-        'FirstName': data.firstName,
-        'LastName': data.lastName,
-        'Phone': data.phoneType,
-        'PhoneNumber': data.phoneNumber
+    const dataObj = {
+        FirstName: '',
+        LastName: '',
+        PhoneNumber: ''
     }
+    
+    const [data, setData] = useState(dataObj)
+
+    const history = useHistory()
 
     const handleTyping = (stateData) => {
         return (e) => setData({ ...data, [stateData]: e.target.value })
     }
 
-    const handleSumbit = () => {
-        Axios.post('http://localhost:1337/customers/', postData)
+    const handleSumbit = (event) => {
+        event.preventDefault()
+        Axios.post('http://34.73.118.152:1337/customers/', data)
         .then((res)=>{
-
+            console.log("Form response: ", res)
+            setData(dataObj)
+            setState({...state,refreshCustomers:true})
+            history.push('/CheckIn')
         })
     }
 
@@ -34,17 +34,12 @@ const Form = () => {
         <div className='form'>
             <form onSubmit={handleSumbit}>
                 <label>First name: </label>
-                <input type="text" required name="firstname" value={data.firstName} onChange={handleTyping('firstName')}></input>
+                <input type="text" required name="FirstName" value={data.FirstName} onChange={handleTyping('FirstName')}></input>
                 <label>Last name:  </label>
-                <input type="text" required name="lastname" value={data.lastName} onChange={handleTyping('lastName')}></input>
+                <input type="text" required name="LastName" value={data.LastName} onChange={handleTyping('LastName')}></input>
                 <label>Phone Number: </label>
-                <input type='number' required name='phoneNumber' value={data.phoneNumber} onChange={handleTyping('phoneNumber')}></input>
+                <input type='number' required name='PhoneNumber' value={data.PhoneNumber} onChange={handleTyping('PhoneNumber')}></input>
 
-                <label>Pick your phone: </label>
-                <select name='phones' id='phones-select' value={data.phoneType} onChange={handleTyping('phoneType')}>
-                    <option value="Samsung">Samsung</option>
-                    <option value="iPhone">iPhone</option>
-                </select>
                 <br></br>
                 <input type="submit" value="Submit"></input>
                 <br></br>

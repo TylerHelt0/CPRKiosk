@@ -9,15 +9,16 @@ import axios from 'axios'
 const App = () => {
 
 	const [state, setState] = useState({
-		customers: []
+		customers: [],
+		refreshCustomers:false
 	})
 
-	useEffect(() => {
-		axios.get('http://71.150.156.98:1337/customers/')
-			.then((res) => {
-				setState({ ...state, customers: res.data })
-			})
-	}, [])
+	useEffect( () => {
+		axios.get('http://34.73.118.152:1337/customers/')
+		.then( (res) => {
+			setState({ ...state, customers: res.data, refreshCustomers:false})
+		})
+	}, [state.refreshCustomers === true])
 
 	console.log(state.customers)
 

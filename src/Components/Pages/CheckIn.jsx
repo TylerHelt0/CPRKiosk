@@ -1,6 +1,7 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-import logo from '../../logo.svg';
+import Logo from '../../logo.svg';
 import Customers from '../Customers'
 import Form from '../Form'
 
@@ -10,10 +11,10 @@ import Form from '../Form'
 const Checkin = ({ state,setState }) => {
     return (
         <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+            <Link to='/'><img className='App-logo' src={Logo} alt="company logo"/></Link>
             {/* global state is passed to form, along with setState  */}
             <Form state={state} setState={setState}/>
-            <Customers state={state} />
+            {/* <Customers state={state} /> */}
         </header>
     )
 }

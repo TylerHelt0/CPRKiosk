@@ -1,6 +1,6 @@
 //Importing node packages that make code work
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import axios from 'axios'
 
 //importing styles and reusable react components

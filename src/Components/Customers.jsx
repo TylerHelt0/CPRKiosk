@@ -7,7 +7,7 @@ const Customers = ({ state }) => {
 	// state.customers
 	const customerList = () => state.customers.map((customer) => {
 		return (
-			<div key={customer.id}>
+			<div className='customers-list' key={customer.id}>
 				<li>{customer.FirstName} {customer.LastName}</li>
 				<p>{customer.PhoneNumber}</p>
 				<p>{customer.Email}</p>

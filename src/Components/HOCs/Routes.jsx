@@ -16,9 +16,10 @@ const Routes = ({ state,setState }) => {
     <>
         {/* List of react components and the address bar paths that 
         render them */}
-        <Route exact path='/' render={() => <Landing state={state} />}></Route>
+        <Route exact path='/' render={() => <Landing state={state} setState={setState}/>}></Route>
         <Route path='/CheckIn' render={() => <Checkin state={state} setState={setState}/>}></Route>
         <Route path='/ThankYou' render={() => <ThankYou />}></Route>
+
     </>)
 }
 

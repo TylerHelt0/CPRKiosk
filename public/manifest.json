@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CPR Kiosk",
+  "name": "CPR Check-In Kiosk",
   "icons": [
     {
       "src": "favicon.ico",

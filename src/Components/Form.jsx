@@ -6,6 +6,9 @@ import {Button,Form} from 'semantic-ui-react'
 
 import TOS from './TOS'
 
+//NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
+//LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
+
 
 const CustomerForm = ({state,setState}) => {
 
@@ -13,11 +16,10 @@ const CustomerForm = ({state,setState}) => {
     // corresponding value and onChange parameters
     // dataObj is the object sent to strappi/customers POST route
     const dataObj = {
-        FirstName: '',
-        LastName: '',
-        PhoneNumber: '',
-        Email:'',
-        tosAccepted:false
+        firstname: "",
+        lastname: "",
+        phone: 0,
+        email: ""
     }
     
     //Form has its own state distinct from global state. It is structured according to
@@ -40,7 +42,7 @@ const CustomerForm = ({state,setState}) => {
     //sets global state.refreshCustomers to reload app and display new list of customers. 
     const handleSumbit = (event) => {
         event.preventDefault()
-        Axios.post('http://34.73.118.152:1337/customers/', data)
+        Axios.post('https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21', data)
         .then((res)=>{
             console.log("Form response: ", res)
             setData(dataObj)
@@ -54,25 +56,23 @@ const CustomerForm = ({state,setState}) => {
         <Form inverted={true} onSubmit={handleSumbit}>
             <Form.Field>
                 <label>First name: </label>
-                <input type="text" required name="FirstName" value={data.FirstName} onChange={handleTyping('FirstName')}></input>
+                <input type="text" required name="firstname" value={data.firstname} onChange={handleTyping('firstname')}></input>
             </Form.Field>
             <Form.Field>
                 <label>Last name:  </label>
-                <input type="text" required name="LastName" value={data.LastName} onChange={handleTyping('LastName')}></input>
+                <input type="text" required name="lastname" value={data.lastname} onChange={handleTyping('lastname')}></input>
             </Form.Field>
             <Form.Field>
                 <label>Phone Number: </label>
-                <input type='text' required name='PhoneNumber' value={data.PhoneNumber} onChange={handleTyping('PhoneNumber')}></input>
+                <input type='text' required name='phone' value={data.phone} onChange={handleTyping('phone')}></input>
             </Form.Field>
             <Form.Field>
                 <label>Email: </label>
-                <input type='email' required name='Email' value={data.Email} onChange={handleTyping('Email')}></input>
+                <input type='email' required name='email' value={data.email} onChange={handleTyping('email')}></input>
             </Form.Field>
             <Form.Field>
-                <p>Please read and agree to <TOS state={data} setState={setData} /></p>
-                
-            </Form.Field>
-            <Form.Field>
+                <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<a>terms</a>}/>.</p>
+                <p>Notice: By clicking submit, you AGREE with our Terms of Service</p>
                 
             </Form.Field>
             <Button type='submit'>Submit</Button>

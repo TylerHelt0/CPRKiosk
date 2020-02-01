@@ -1,3 +1,7 @@
+//NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
+//LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
+
+
 //Importing node packages that make code work
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
@@ -14,13 +18,14 @@ const App = () => {
 	// with props
 	const [state, setState] = useState({
 		customers: [],
-		refreshCustomers:false
+		refreshCustomers:false,
+		tosAccepted:false
 	})
 
 	//Runs once when app is started, doesn't run again unless state.refreshCustomers is
 	// set to true. After it runs, set refreshCustomers to false. 
 	useEffect( () => {
-		axios.get('http://34.73.118.152:1337/customers/')
+		axios.get('https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21')
 		.then( (res) => {
 			//Creates new object identical to state, sets custoemers to response data and 
 			//sets refreshCustomers to false

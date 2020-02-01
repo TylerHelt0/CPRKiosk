@@ -5,14 +5,14 @@ import SignaturePad from 'react-signature-canvas'
 
 import 'semantic-ui-css/semantic.min.css'
 
-const TOS = ({state,setState}) => {
+const TOS = ({state,setState,trigger}) => {
 
     const handleClick = (key) => {
         return () => setState({...state, tosAccepted:key})
     }
 
     return (
-        <Modal className='tos-modal' trigger ={<a>Terms of Service</a>} closeIcon={true}>
+        <Modal className='tos-modal' trigger={trigger} closeIcon={true}>
             <Modal.Header>Terms of Service</Modal.Header>
             <Modal.Content scrolling>
                 <h1>IMPORTANT: ALL devices should be 

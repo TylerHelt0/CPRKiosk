@@ -12,12 +12,14 @@ import '../../Resources/Fonts/Avenir-Heavy.ttf'
 const Landing = ({state,setState}) => {
     return (
         <header className='App-header Landing'>
+        <div className="trans-background">
             <img src={Logo} alt="company logo" />
             <p>Welcome To Our Self Check In Kiosk!</p>
             <Link to='/CheckIn'><img src={Checkin} alt="checkinbutton" /></Link>
             <div className='Landing-KioskTOS'>
                 {/* <Link to='/KioskTOS'>TOS For Establishment</Link> */}
                 <Legal state={state} setState={setState} trigger={<p>Kiosk Legal Information</p>} />
+            </div>
             </div>
         </header>
     )

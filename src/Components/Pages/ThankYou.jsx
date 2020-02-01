@@ -11,13 +11,13 @@ import Logo from '../../Resources/Images/thereal.svg';
 const ThankYou = () => {
     const history = useHistory()
 
-//  useEffect(() => {
-//         setTimeout(() => {
-//             if (history.location.pathname === '/ThankYou') {
-//                 history.push('/')
-//             }
-//         }, 7500)
-//     })
+ useEffect(() => {
+        setTimeout(() => {
+            if (history.location.pathname === '/ThankYou') {
+                history.push('/')
+            }
+        }, 7500)
+    })
 
     return (
         <header className='App-header ThankYou'>

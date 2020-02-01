@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import SignaturePad from 'react-signature-canvas'
@@ -18,7 +17,7 @@ const TOS = ({state,setState,trigger}) => {
                 <h1>IMPORTANT: ALL devices should be 
                 backed-up by customer prior to leaving them for repair with Provider.</h1>
                 <h2>Limited Warranty and Limitation of Liability.</h2>
-                <p>CPR Cell Phone Repair shall 
+                <p>PT Tech shall 
                 hereinafter be referred to as "Provider." Provider warrants to Customer that,
                 at the time and place of delivery of the repaired product,
                 and for as long as Customer owns the product repaired, the work performed 

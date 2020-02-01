@@ -29,11 +29,12 @@ const App = () => {
 		.then( (res) => {
 			//Creates new object identical to state, sets custoemers to response data and 
 			//sets refreshCustomers to false
+			console.log("App Refresh ",res)
 			setState({ ...state, customers: res.data, refreshCustomers:false})
 		})
 	}, [state.refreshCustomers === true])
 
-	console.log('state.customers:',state.customers)
+	console.log('App State:',state.customers)
 
 	//Renders html/other react components
 	return (

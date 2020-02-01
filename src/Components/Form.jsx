@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
-import {Button,Form} from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 
 import TOS from './TOS'
@@ -10,18 +10,18 @@ import TOS from './TOS'
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
 
 
-const CustomerForm = ({state,setState}) => {
+const CustomerForm = ({ state, setState }) => {
 
     // If adding new data fields to send to Strapi, also add label, and input with
     // corresponding value and onChange parameters
     // dataObj is the object sent to strappi/customers POST route
     const dataObj = {
-        firstname: "",
-        lastname: "",
-        phone: 0,
-        email: ""
+        "firstname": "",
+        "lastname": "",
+        "phone": "",
+        "email": ""
     }
-    
+
     //Form has its own state distinct from global state. It is structured according to
     //dataObj and is reset when form is submitted
     const [data, setData] = useState(dataObj)
@@ -42,13 +42,40 @@ const CustomerForm = ({state,setState}) => {
     //sets global state.refreshCustomers to reload app and display new list of customers. 
     const handleSumbit = (event) => {
         event.preventDefault()
-        Axios.post('https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21', data)
-        .then((res)=>{
-            console.log("Form response: ", res)
-            setData(dataObj)
-            setState({...state,refreshCustomers:true})
-            history.push('/ThankYou')
-        })
+
+        const cors = 'https://cors-anywhere.herokuapp.com/'
+        const url = 'https://pttech.repairshopr.com/api/v1/'
+        const api_key = '?api_key=0b248210-7705-426c-b13a-2c4877c95f21'
+
+        const corsUrl = cors + url + 'customers/' + api_key
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+
+        Axios.post(corsUrl, data, config)
+            .then((res) => {
+                console.log("Form response: ", res)
+                setData(dataObj)
+                setState({ ...state, refreshCustomers: true })
+                history.push('/ThankYou')
+            })
+            .catch((error) => {
+                if (error.status = 422) {
+                    const config = {
+                        headers: { "Content-Type": "application/json" },
+                        params: { email: data.email }
+                    }
+                    Axios.get(corsUrl, config)
+                        .then((response) => {
+                            console.log(response.data.customers[0].id)
+                            alert("Email " + response.data.customers[0].email + " exists")
+                        })
+                }
+                console.log("Form error ", error)
+            })
     }
 
     return (
@@ -71,14 +98,18 @@ const CustomerForm = ({state,setState}) => {
                 <input type='email' required name='email' value={data.email} onChange={handleTyping('email')}></input>
             </Form.Field>
             <Form.Field>
-                <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<a>terms</a>}/>.</p>
+                <label>OPT in on SMS</label>
+                <input type='checkbox' required name='SMS' value={data.email} onChange={handleTyping('sms')}></input>
+            </Form.Field>
+            <Form.Field>
+                <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<a href='#'>terms</a>} />.</p>
                 <p>Notice: By clicking submit, you AGREE with our Terms of Service</p>
-                
+
             </Form.Field>
             <Button type='submit'>Submit</Button>
         </Form>
 
-        
+
     )
 }
 

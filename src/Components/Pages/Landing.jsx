@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Form } from 'semantic-ui-react'
 import Checkin from '../../Resources/Images/checkin.png';
 import Logo from '../../Resources/Images/thereal.svg';
 import Legal from '../Legal'

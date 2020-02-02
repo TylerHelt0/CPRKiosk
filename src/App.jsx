@@ -18,21 +18,23 @@ const App = () => {
 	// with props
 	const [state, setState] = useState({
 		customers: [],
-		refreshCustomers:false,
+		refreshCustomers:true,
 		tosAccepted:false
 	})
 
 	//Runs once when app is started, doesn't run again unless state.refreshCustomers is
 	// set to true. After it runs, set refreshCustomers to false. 
 	useEffect( () => {
-		axios.get('https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21')
-		.then( (res) => {
-			//Creates new object identical to state, sets custoemers to response data and 
-			//sets refreshCustomers to false
-			console.log("App Refresh ",res)
-			setState({ ...state, customers: res.data, refreshCustomers:false})
-		})
-	}, [state.refreshCustomers === true])
+		if (state.refreshCustomers === true) {
+			axios.get('https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21')
+			.then( (res) => {
+				//Creates new object identical to state, sets custoemers to response data and 
+				//sets refreshCustomers to false
+				// console.log("App Refresh ",res)
+				setState({ ...state, customers: res.data, refreshCustomers:false})
+			})
+		}
+	}, [state])
 
 	console.log('App State:',state.customers)
 

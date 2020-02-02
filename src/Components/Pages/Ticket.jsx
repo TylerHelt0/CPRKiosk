@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import Axios from 'axios'
+// import { useHistory } from 'react-router-dom'
+// import Axios from 'axios'
 import { Button, Form } from 'semantic-ui-react'
 
 
@@ -28,7 +28,8 @@ const CustomerForm = ({ state, setState }) => {
 
     //Allows ability to redirect to different react component after axios POST, 
     // part of react-router-dom
-    const history = useHistory()
+
+    // const history = useHistory()
 
     //Enables using react to control input fields
     //Is callled by inputs with a text key name of dataObj and prints keystrokes into
@@ -43,17 +44,17 @@ const CustomerForm = ({ state, setState }) => {
     const handleSumbit = (event) => {
         event.preventDefault()
 
-        const cors = 'https://cors-anywhere.herokuapp.com/'
-        const url = 'https://pttech.repairshopr.com/api/v1/'
-        const api_key = '?api_key=0b248210-7705-426c-b13a-2c4877c95f21'
+        // const cors = 'https://cors-anywhere.herokuapp.com/'
+        // const url = 'https://pttech.repairshopr.com/api/v1/'
+        // const api_key = '?api_key=0b248210-7705-426c-b13a-2c4877c95f21'
 
-        const corsUrl = cors + url + 'customers/' + api_key
+        // const corsUrl = cors + url + 'customers/' + api_key
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
+        // const config = {
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // }
 
     }
     return (

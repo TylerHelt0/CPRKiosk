@@ -63,7 +63,7 @@ const CustomerForm = ({ state, setState }) => {
                 history.push('/ThankYou')
             })
             .catch((error) => {
-                if (error.status = 422) {
+                if (error.response.status === 422) {
                     const config = {
                         headers: { "Content-Type": "application/json" },
                         params: { email: data.email }
@@ -74,7 +74,7 @@ const CustomerForm = ({ state, setState }) => {
                             alert("Email " + response.data.customers[0].email + " exists")
                         })
                 }
-                console.log("Form error ", error)
+                console.log("Form error ", error.response)
             })
     }
 
@@ -102,7 +102,7 @@ const CustomerForm = ({ state, setState }) => {
                 <input type='checkbox' required name='SMS' value={data.email} onChange={handleTyping('sms')}></input>
             </Form.Field>
             <Form.Field>
-                <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<a href='#'>terms</a>} />.</p>
+                <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<span className='tos'>terms</span>}/>.</p>
                 <p>Notice: By clicking submit, you AGREE with our Terms of Service</p>
 
             </Form.Field>
@@ -113,7 +113,7 @@ const CustomerForm = ({ state, setState }) => {
     )
 }
 
-{/* <div className='customer-form'>
+/* <div className='customer-form'>
     <form onSubmit={handleSumbit}>
         <div className='input'>
             <label>First name: </label>
@@ -147,7 +147,7 @@ const CustomerForm = ({ state, setState }) => {
             <input type="submit" value="Submit"></input>
         </div>
     </form>
-</div> */}
+</div> */
 
 
 export default CustomerForm

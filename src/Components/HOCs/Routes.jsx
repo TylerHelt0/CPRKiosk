@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route,useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
+import {CSSTransition , TransitionGroup} from 'react-transition-group'
 
 //Loading other react components for use as app 'pages'
 import Checkin from '../Pages/CheckIn'
@@ -12,16 +13,21 @@ import Ticket from '../Pages/Ticket'
 const Routes = ({ state,setState }) => {
 
     const history = useHistory()
-    console.log("History: ",history.location)
+    console.log("History: ", history)
     return (
     <>
         {/* List of react components and the address bar paths that 
         render them */}
-        <Route exact path='/' render={() => <Landing state={state} setState={setState}/>}></Route>
-        <Route path='/CheckIn' render={() => <Checkin state={state} setState={setState}/>}></Route>
-        <Route path='/ThankYou' render={() => <ThankYou />}></Route>
-        <Route path='/Ticket' render ={() => <Ticket state={state} setState={setState}/>}></Route>
-
+        <TransitionGroup appear enter exit component={null}>
+            <CSSTransition key={history.location.key} timeout={600} classNames='route-transition'>
+            <Switch location={history.location}>
+                <Route exact path='/' render={() => <Landing state={state} setState={setState}/>}></Route>
+                <Route path='/CheckIn' render={() => <Checkin state={state} setState={setState}/>}></Route>
+                <Route path='/ThankYou' render={() => <ThankYou />}></Route>
+                <Route path='/Ticket' render ={() => <Ticket state={state} setState={setState}/>}></Route>
+            </Switch>
+            </CSSTransition>
+        </TransitionGroup>
 
     </>)
 }

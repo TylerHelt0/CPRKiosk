@@ -16,11 +16,14 @@ const App = () => {
 
 	//Global state of app, can be passed down to child compoenents 
 	// with props
-	const [state, setState] = useState({
+
+	const initialState = {
 		customers: [],
 		refreshCustomers:true,
 		tosAccepted:false
-	})
+	}
+
+	const [state, setState] = useState(initialState)
 
 	//Runs once when app is started, doesn't run again unless state.refreshCustomers is
 	// set to true. After it runs, set refreshCustomers to false. 
@@ -31,12 +34,12 @@ const App = () => {
 				//Creates new object identical to state, sets custoemers to response data and 
 				//sets refreshCustomers to false
 				// console.log("App Refresh ",res)
-				setState({ ...state, customers: res.data, refreshCustomers:false})
+				setState({ ...state, customers: res.data.customers, refreshCustomers:false})
 			})
 		}
 	}, [state])
 
-	console.log('App State:',state.customers)
+	console.log('App State:',state)
 
 	//Renders html/other react components
 	return (

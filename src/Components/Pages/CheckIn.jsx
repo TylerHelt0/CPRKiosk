@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import Logo from '../../Resources/Images/thereal.svg';
+
+import Customers from '../Customers'
 import Form from '../Form'
 
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR

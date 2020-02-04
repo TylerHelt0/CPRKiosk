@@ -99,7 +99,7 @@ const CustomerForm = ({ state, setState }) => {
             </Form.Field>
             <Form.Field>
                 <label>OPT in on SMS</label>
-                <input type='checkbox' required name='SMS' value={data.email} onChange={handleTyping('sms')}></input>
+                <input type='checkbox' name='SMS' value={data.email} onChange={handleTyping('sms')}></input>
             </Form.Field>
             <Form.Field>
                 <p>Please read and agree to the <TOS state={state} setState={setState} trigger={<span className='tos'>terms</span>}/>.</p>

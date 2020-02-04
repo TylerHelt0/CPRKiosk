@@ -15,11 +15,11 @@ const Landing = ({state,setState}) => {
             <img src={Logo} alt="company logo" />
             <p>Welcome To Our Self Check In Kiosk!</p>
             <Link to='/CheckIn'><img src={Checkin} alt="checkinbutton" /></Link>
-            <div className='Landing-KioskTOS'>
+        </div>
+        <div className='AppTOS'>
                 {/* <Link to='/KioskTOS'>TOS For Establishment</Link> */}
                 <Legal state={state} setState={setState} trigger={<p>Kiosk Legal Information</p>} />
-            </div>
-            </div>
+        </div>
         </header>
     )
 }

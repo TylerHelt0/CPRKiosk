@@ -11,7 +11,7 @@ const TOS = ({state,setState,trigger}) => {
     }
 
     return (
-        <Modal className='tos-modal' trigger={trigger} closeIcon={true}>
+        <Modal className='TOS-modal' trigger={trigger} closeIcon={true}>
             <Modal.Header>Terms of Service</Modal.Header>
             <Modal.Content scrolling>
                 <h1>IMPORTANT: ALL devices should be 

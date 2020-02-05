@@ -12,7 +12,7 @@ const Landing = ({state,setState}) => {
     return (
         <header className='App-header Landing'>
         <div className="trans-background">
-            <img src={Logo} alt="company logo" />
+            <img className='App-logo' src={Logo} alt="company logo" />
             <p>Welcome To Our Self Check In Kiosk!</p>
             <Link to='/CheckIn'><img src={Checkin} alt="checkinbutton" /></Link>
         </div>

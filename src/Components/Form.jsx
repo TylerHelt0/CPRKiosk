@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { Button, Form } from 'semantic-ui-react'
 
-
+import Alert from './Alert'
 import TOS from './TOS'
 
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
@@ -25,6 +25,17 @@ const CustomerForm = ({ state, setState }) => {
     //Form has its own state distinct from global state. It is structured according to
     //dataObj and is reset when form is submitted
     const [data, setData] = useState(dataObj)
+    const [alertState, setAlert] = useState({show:false,text:''})
+
+
+    useEffect(()=>{
+        if (alertState.show !== false){
+            setTimeout(()=>{
+                setAlert({...alertState,show:false})
+            },5000)
+        }
+    },[alertState])
+   
 
     //Allows ability to redirect to different react component after axios POST, 
     // part of react-router-dom
@@ -71,15 +82,24 @@ const CustomerForm = ({ state, setState }) => {
                     Axios.get(corsUrl, config)
                         .then((response) => {
                             console.log(response.data.customers[0].id)
-                            alert("Email " + response.data.customers[0].email + " exists")
+                            // alert("Email " + response.data.customers[0].email + " exists")
+                            setAlert({...alertState, show:true,text:"Email "+ response.data.customers[0].email + ' exists.'})
                         })
                 }
                 console.log("Form error ", error.response)
             })
     }
 
-    return (
+    // const renderAlert = () => {
+    //     if (alertState.show) {
+    //         return <Alert state={alertState} />
+    //     }
+    // }
 
+    return (
+        <div>
+            <Alert state={alertState} />
+        
         <Form inverted={true} onSubmit={handleSumbit}>
             <Form.Field>
                 <label>First name: </label>
@@ -109,7 +129,7 @@ const CustomerForm = ({ state, setState }) => {
             <Button type='submit'>Submit</Button>
         </Form>
 
-
+        </div>
     )
 }
 

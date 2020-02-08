@@ -157,9 +157,10 @@ const CustomerForm = ({ state, setState }) => {
               setState={setState}
               trigger={<span className="tos">terms</span>}
             />
-            .
+            
+          
           </p>
-          <p>Notice: By clicking submit, you AGREE with our Terms of Service</p>
+
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>

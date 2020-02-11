@@ -5,15 +5,17 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
+import * as Server from './Services/Server'
 
 //importing styles and reusable react components
-import "./App.css";
+import * as Styles from './Components/Styles/App';
 import Routes from "./Components/HOCs/Routes";
 
 //Defines a React Component,  using arrow function (params) => {function body}
 const App = () => {
   //Global state of app, can be passed down to child compoenents
   // with props
+  console.log(Server)
 
   const initialState = {
     customers: [],
@@ -27,8 +29,7 @@ const App = () => {
   // set to true. After it runs, set refreshCustomers to false.
   useEffect(() => {
     if (state.refreshCustomers === true) {
-      axios
-        .get("https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21")
+      Server.refreshCustomers()
         .then(res => {
           //Creates new object identical to state, sets custoemers to response data and
           //sets refreshCustomers to false
@@ -46,7 +47,7 @@ const App = () => {
 
   //Renders html/other react components
   return (
-    <div className="App">
+    <div style={Styles.App}>
       {/* enables using address bar for different 'pages' */}
       <Router>
         {/* <Routes> = contains all possible 'pages' for address bar */}

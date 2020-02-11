@@ -6,6 +6,8 @@ import { Button, Form } from "semantic-ui-react";
 import Alert from "./Alert";
 import TOS from "./TOS";
 
+import * as Styles from './Styles/App'
+
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
 
@@ -89,18 +91,12 @@ const CustomerForm = ({ state, setState }) => {
       });
   };
 
-  // const renderAlert = () => {
-  //     if (alertState.show) {
-  //         return <Alert state={alertState} />
-  //     }
-  // }
-
   return (
-    <div>
+    <>
       <Alert state={alertState} />
 
       <Form inverted={true} onSubmit={handleSumbit}>
-        <Form.Field>
+        <Form.Field style={Styles.FormInputText}>
           <label>First name: </label>
           <input
             type="text"
@@ -110,7 +106,7 @@ const CustomerForm = ({ state, setState }) => {
             onChange={handleTyping("firstname")}
           ></input>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={Styles.FormInputText}>
           <label>Last name: </label>
           <input
             type="text"
@@ -120,7 +116,7 @@ const CustomerForm = ({ state, setState }) => {
             onChange={handleTyping("lastname")}
           ></input>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={Styles.FormInputText}>
           <label>Phone Number: </label>
           <input
             type="text"
@@ -130,7 +126,7 @@ const CustomerForm = ({ state, setState }) => {
             onChange={handleTyping("phone")}
           ></input>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={Styles.FormInputText}>
           <label>Email: </label>
           <input
             type="email"
@@ -163,7 +159,7 @@ const CustomerForm = ({ state, setState }) => {
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>
-    </div>
+    </>
   );
 };
 

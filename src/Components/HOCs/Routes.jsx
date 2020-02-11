@@ -8,11 +8,14 @@ import Landing from "../Pages/Landing";
 import ThankYou from "../Pages/ThankYou";
 import Ticket from "../Pages/Ticket";
 
+import '../Styles/Transitions/RouteTransition.css'
+
 //prop from previous component 'state' destructured for use as
 // 'state' in this Component, and passed to children
 const Routes = ({ state, setState }) => {
   const history = useHistory();
   console.log("History: ", history);
+
   return (
     <>
       {/* List of react components and the address bar paths that 
@@ -21,7 +24,7 @@ const Routes = ({ state, setState }) => {
         <CSSTransition
           key={history.location.key}
           timeout={600}
-          classNames="route-transition"
+          classNames={"route-transition"}
         >
           <Switch location={history.location}>
             <Route

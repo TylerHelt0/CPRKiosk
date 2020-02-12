@@ -1,7 +1,7 @@
 import CheckInBackground from '../../Resources/Images/formimage.jpeg'
 import LandingBackground from '../../Resources/Images/onphone.jpeg'
-import TicketBackground from '../../Resources/Images/pexels-photo-461082.jpeg'
-import ThankYouBackground from '../../Resources/Images/thankyouimage.jpeg'
+// import TicketBackground from '../../Resources/Images/pexels-photo-461082.jpeg'
+// import ThankYouBackground from '../../Resources/Images/thankyouimage.jpeg'
 
 export const App = {
     textAlign:"center",
@@ -26,7 +26,7 @@ export const Landing = {
     flexDirection:"column",
     justifyContent:"center",
     alignItems:"center",
-    height:"100vh"
+    minHeight:"100vh"
 }
 
 export const CheckIn = {
@@ -42,12 +42,11 @@ export const CheckIn = {
 
 export const Form = {
     justifyContent:'center',
-    // width:'50%',
     padding:'0 10%'
 }
 
 export const FormInputText = {
-    padding:"0 10%"
+    padding:"0 10%",
 }
 
 export const TransBackground = {

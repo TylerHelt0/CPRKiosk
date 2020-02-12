@@ -1,24 +1,21 @@
 import React from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { useHistory } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 
-import * as Styles from './Styles/App'
+import * as Styles from './Styles/Styles'
 import './Styles/Transitions/AlertTransition.css'
 
-const Alert = props => {
-  const history = useHistory();
-
+const Alert = ({state}) => {
   return (
     <CSSTransition
       appear
       exit
-      in={props.state.show}
+      in={state.alert ? true : false}
       timeout={5000}
       classNames="Alert"
     >
       <div style={Styles.Alert}>
         <h1>Alert!</h1>
-        <p>{props.state.text}</p>
+        <p>{state.alert}</p>
       </div>
     </CSSTransition>
   );

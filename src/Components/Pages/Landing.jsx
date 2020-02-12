@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Checkin from "../../Resources/Images/checkin.png";
+import CheckinButton from "../../Resources/Images/checkin.png";
 import Logo from "../../Resources/Images/thereal.svg";
+import Customers from '../Customers'
 import Legal from "../Legal";
-
-import * as Styles from '../Styles/App'
+import * as Styles from '../Styles/Styles'
 import "../../Resources/Fonts/Avenir-Heavy.ttf";
 
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
@@ -18,17 +18,17 @@ const Landing = ({ state, setState }) => {
         <img style={Styles.AppLogo} src={Logo} alt="company logo" />
         <p>Welcome To Our Self Check In Kiosk!</p>
         <Link to="/CheckIn">
-          <img src={Checkin} alt="checkinbutton" />
+          <img src={CheckinButton} alt="checkinbutton" />
         </Link>
       </div>
       <div className="AppTOS">
-        {/* <Link to='/KioskTOS'>TOS For Establishment</Link> */}
         <Legal
           state={state}
           setState={setState}
           trigger={<p>Kiosk Legal Information</p>}
         />
       </div>
+      {/* <Customers state={state} /> */}
     </header>
   );
 };

@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 import Logo from "../../Resources/Images/thereal.svg";
 
@@ -8,15 +7,6 @@ import Logo from "../../Resources/Images/thereal.svg";
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
 
 const ThankYou = () => {
-  const history = useHistory();
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (history.location.pathname === "/ThankYou") {
-        history.push("/");
-      }
-    }, 7500);
-  });
 
   return (
     <header className="App-header ThankYou">

@@ -4,19 +4,16 @@
 //Importing node packages that make code work
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import axios from "axios";
 import * as Server from './Services/Server'
 
 //importing styles and reusable react components
-import * as Styles from './Components/Styles/App';
+import * as Styles from './Components/Styles/Styles';
 import Routes from "./Components/HOCs/Routes";
 
 //Defines a React Component,  using arrow function (params) => {function body}
 const App = () => {
   //Global state of app, can be passed down to child compoenents
   // with props
-  console.log(Server)
-
   const initialState = {
     customers: [],
     refreshCustomers: true,
@@ -29,17 +26,7 @@ const App = () => {
   // set to true. After it runs, set refreshCustomers to false.
   useEffect(() => {
     if (state.refreshCustomers === true) {
-      Server.refreshCustomers()
-        .then(res => {
-          //Creates new object identical to state, sets custoemers to response data and
-          //sets refreshCustomers to false
-          // console.log("App Refresh ",res)
-          setState({
-            ...state,
-            customers: res.data.customers,
-            refreshCustomers: false
-          });
-        });
+      Server.refreshCustomers(state,setState)
     }
   }, [state]);
 

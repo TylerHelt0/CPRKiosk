@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
@@ -15,6 +15,14 @@ import '../Styles/Transitions/RouteTransition.css'
 const Routes = ({ state, setState }) => {
   const history = useHistory();
   console.log("History: ", history);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (history.location.pathname.toUpperCase() === "/THANKYOU") {
+        history.push("/");
+      }
+    }, 7500);
+  });
 
   return (
     <>

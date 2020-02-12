@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 import { Button, Form } from "semantic-ui-react";
+
+import * as Server from "../Services/Server";
 
 import Alert from "./Alert";
 import TOS from "./TOS";
-
-import * as Styles from './Styles/App'
+import * as Styles from "./Styles/Styles";
 
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
@@ -15,25 +15,28 @@ const CustomerForm = ({ state, setState }) => {
   // If adding new data fields to send to Strapi, also add label, and input with
   // corresponding value and onChange parameters
   // dataObj is the object sent to strappi/customers POST route
-  const dataObj = {
-    firstname: "",
-    lastname: "",
-    phone: "",
-    email: ""
+  const formInitialState = {
+    data:{
+      firstname: "",
+      lastname: "",
+      phone: "",
+      email: "",
+      sms: false
+    },
+     alert: false
   };
 
   //Form has its own state distinct from global state. It is structured according to
   //dataObj and is reset when form is submitted
-  const [data, setData] = useState(dataObj);
-  const [alertState, setAlert] = useState({ show: false, text: "" });
+  const [form, setForm] = useState(formInitialState);
 
   useEffect(() => {
-    if (alertState.show !== false) {
+    if (form.alert !== false) {
       setTimeout(() => {
-        setAlert({ ...alertState, show: false });
+        setForm({ ...form, alert: false });
       }, 5000);
     }
-  }, [alertState]);
+  }, [form]);
 
   //Allows ability to redirect to different react component after axios POST,
   // part of react-router-dom
@@ -43,47 +46,29 @@ const CustomerForm = ({ state, setState }) => {
   //Is callled by inputs with a text key name of dataObj and prints keystrokes into
   //dataObj field that corresponds to key provided
   const handleTyping = key => {
-    return e => setData({ ...data, [key]: e.target.value });
+    return e => setForm({ ...form, data:{...form.data, [key]:e.target.value}});
   };
 
-  //event.prevent() defaullt stops form from reloading before data is sent
+  //event.preventSefault() stops form from reloading before data is sent
   //Sends data to strappi to make new customer, resets data state to blank dataObj,
   //sets global state.refreshCustomers to reload app and display new list of customers.
   const handleSumbit = event => {
     event.preventDefault();
 
-    const cors = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://pttech.repairshopr.com/api/v1/";
-    const api_key = "?api_key=0b248210-7705-426c-b13a-2c4877c95f21";
-
-    const corsUrl = cors + url + "customers/" + api_key;
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-
-    Axios.post(corsUrl, data, config)
+    Server.newCustomer(form.data)
       .then(res => {
         console.log("Form response: ", res);
-        setData(dataObj);
+        setForm(formInitialState);
         setState({ ...state, refreshCustomers: true });
         history.push("/ThankYou");
       })
       .catch(error => {
         if (error.response.status === 422) {
-          const config = {
-            headers: { "Content-Type": "application/json" },
-            params: { email: data.email }
-          };
-          Axios.get(corsUrl, config).then(response => {
-            console.log(response.data.customers[0].id);
-            // alert("Email " + response.data.customers[0].email + " exists")
-            setAlert({
-              ...alertState,
-              show: true,
-              text: "Email " + response.data.customers[0].email + " exists."
+          Server.refreshCustomersByEmail(form.data.email).then(response => {
+            console.error("Customer ", response.data.customers[0].id, " exists on server");
+            setForm({
+              ...form,
+              alert: "Email " + response.data.customers[0].email + " exists."
             });
           });
         }
@@ -93,8 +78,7 @@ const CustomerForm = ({ state, setState }) => {
 
   return (
     <>
-      <Alert state={alertState} />
-
+      <Alert state={form} />
       <Form inverted={true} onSubmit={handleSumbit}>
         <Form.Field style={Styles.FormInputText}>
           <label>First name: </label>
@@ -102,7 +86,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="firstname"
-            value={data.firstname}
+            value={form.data.firstname}
             onChange={handleTyping("firstname")}
           ></input>
         </Form.Field>
@@ -112,7 +96,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="lastname"
-            value={data.lastname}
+            value={form.data.lastname}
             onChange={handleTyping("lastname")}
           ></input>
         </Form.Field>
@@ -122,7 +106,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="phone"
-            value={data.phone}
+            value={form.data.phone}
             onChange={handleTyping("phone")}
           ></input>
         </Form.Field>
@@ -132,7 +116,7 @@ const CustomerForm = ({ state, setState }) => {
             type="email"
             required
             name="email"
-            value={data.email}
+            value={form.data.email}
             onChange={handleTyping("email")}
           ></input>
         </Form.Field>
@@ -141,7 +125,7 @@ const CustomerForm = ({ state, setState }) => {
           <input
             type="checkbox"
             name="SMS"
-            value={data.email}
+            value={form.data.sms}
             onChange={handleTyping("sms")}
           ></input>
         </Form.Field>
@@ -153,10 +137,7 @@ const CustomerForm = ({ state, setState }) => {
               setState={setState}
               trigger={<span className="tos">terms</span>}
             />
-            
-          
           </p>
-
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>
@@ -168,19 +149,19 @@ const CustomerForm = ({ state, setState }) => {
     <form onSubmit={handleSumbit}>
         <div className='input'>
             <label>First name: </label>
-            <input type="text" required name="FirstName" value={data.FirstName} onChange={handleTyping('FirstName')}></input>
+            <input type="text" required name="FirstName" value={form.data.FirstName} onChange={handleTyping('FirstName')}></input>
         </div>
         <div className='input'>
             <label>Last name:  </label>
-            <input type="text" required name="LastName" value={data.LastName} onChange={handleTyping('LastName')}></input>
+            <input type="text" required name="LastName" value={form.data.LastName} onChange={handleTyping('LastName')}></input>
         </div>
         <div className='input'>
             <label>Phone Number: </label>
-            <input type='number' required name='PhoneNumber' value={data.PhoneNumber} onChange={handleTyping('PhoneNumber')}></input>
+            <input type='number' required name='PhoneNumber' value={form.data.PhoneNumber} onChange={handleTyping('PhoneNumber')}></input>
         </div>
         <div className='input'>
             <label>Email: </label>
-            <input type='email' required name='Email' value={data.Email} onChange={handleTyping('Email')}></input>
+            <input type='email' required name='Email' value={form.data.Email} onChange={handleTyping('Email')}></input>
         </div>
         <div className='radio'>
             <input type='checkbox' />  

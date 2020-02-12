@@ -63,7 +63,7 @@ export const Alert = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    maxWidth: "33vw",
+    width: "50%",
     maxHeight: "20vh",
     background: "#3c3f49",
     padding:"1em",

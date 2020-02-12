@@ -1,8 +1,8 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 
-import * as Styles from './Styles/Styles'
-import './Styles/Transitions/AlertTransition.css'
+import * as Styles from '../Styles/App'
+import '../Styles/Transitions/AlertTransition.css'
 
 const Alert = ({state}) => {
   return (

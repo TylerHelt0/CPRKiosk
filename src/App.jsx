@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import * as Server from './Services/Server'
 
 //importing styles and reusable react components
-import * as Styles from './Components/Styles/Styles';
-import Routes from "./Components/HOCs/Routes";
+import * as Styles from './Styles/App';
+import Routes from "./Routes";
 
 //Defines a React Component,  using arrow function (params) => {function body}
 const App = () => {

@@ -1,7 +1,7 @@
-import CheckInBackground from '../../Resources/Images/formimage.jpeg'
-import LandingBackground from '../../Resources/Images/onphone.jpeg'
-// import TicketBackground from '../../Resources/Images/pexels-photo-461082.jpeg'
-// import ThankYouBackground from '../../Resources/Images/thankyouimage.jpeg'
+import CheckInBackground from '../Resources/Images/formimage.jpeg'
+import LandingBackground from '../Resources/Images/onphone.jpeg'
+// import TicketBackground from '../Resources/Images/pexels-photo-461082.jpeg'
+// import ThankYouBackground from '../Resources/Images/thankyouimage.jpeg'
 
 export const App = {
     textAlign:"center",

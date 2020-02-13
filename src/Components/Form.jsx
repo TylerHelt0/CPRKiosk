@@ -16,27 +16,25 @@ const CustomerForm = ({ state, setState }) => {
   // corresponding value and onChange parameters
   // dataObj is the object sent to strappi/customers POST route
   const formInitialState = {
-    data:{
-      firstname: "",
-      lastname: "",
-      phone: "",
-      email: "",
-      sms: false
-    },
-     alert: false
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    sms: false
   };
 
   //Form has its own state distinct from global state. It is structured according to
   //dataObj and is reset when form is submitted
   const [form, setForm] = useState(formInitialState);
+  const [alert,setAlert] = useState(false);
 
   useEffect(() => {
-    if (form.alert !== false) {
+    if (alert !== false) {
       setTimeout(() => {
-        setForm({ ...form, alert: false });
+        setAlert(false);
       }, 5000);
     }
-  }, [form]);
+  }, [alert]);
 
   //Allows ability to redirect to different react component after axios POST,
   // part of react-router-dom
@@ -46,7 +44,7 @@ const CustomerForm = ({ state, setState }) => {
   //Is callled by inputs with a text key name of dataObj and prints keystrokes into
   //dataObj field that corresponds to key provided
   const handleTyping = key => {
-    return e => setForm({ ...form, data:{...form.data, [key]:e.target.value}});
+    return e => setForm({ ...form, [key]:e.target.value});
   };
 
   //event.preventSefault() stops form from reloading before data is sent
@@ -55,30 +53,30 @@ const CustomerForm = ({ state, setState }) => {
   const handleSumbit = event => {
     event.preventDefault();
 
-    Server.newCustomer(form.data)
-      .then(res => {
-        console.log("Form response: ", res);
-        setForm(formInitialState);
-        setState({ ...state, refreshCustomers: true });
-        history.push("/ThankYou");
-      })
-      .catch(error => {
-        if (error.response.status === 422) {
-          Server.refreshCustomersByEmail(form.data.email).then(response => {
-            console.error("Customer ", response.data.customers[0].id, " exists on server");
-            setForm({
-              ...form,
-              alert: "Email " + response.data.customers[0].email + " exists."
-            });
-          });
-        }
-        console.log("Form error ", error.response);
-      });
+    Server.newCustomer(form)
+    .then( res => {
+      console.log("Form response: ", res)
+      setForm(formInitialState);
+      setState({...state,refreshCustomers:true})
+      history.push("/ThankYou");
+    })
+    .catch(error => {
+      if (error.response.status === 422) {
+        Server.refreshCustomersByEmail(form.email)
+        .then( res => {
+          console.log("Customer ", res.data.customers[0].id, " exists on server");
+          setAlert("Email " + res.data.customers[0].email + " exists.")
+        })
+      } else {
+        console.log("Form error: ", error)
+        setAlert("Error logged to console")
+      }
+    });
   };
 
   return (
     <>
-      <Alert state={form} />
+      <Alert state={alert} />
       <Form inverted={true} onSubmit={handleSumbit}>
         <Form.Field style={Styles.FormInputText}>
           <label>First name: </label>
@@ -86,7 +84,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="firstname"
-            value={form.data.firstname}
+            value={form.firstname}
             onChange={handleTyping("firstname")}
           ></input>
         </Form.Field>
@@ -96,7 +94,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="lastname"
-            value={form.data.lastname}
+            value={form.lastname}
             onChange={handleTyping("lastname")}
           ></input>
         </Form.Field>
@@ -106,7 +104,7 @@ const CustomerForm = ({ state, setState }) => {
             type="text"
             required
             name="phone"
-            value={form.data.phone}
+            value={form.phone}
             onChange={handleTyping("phone")}
           ></input>
         </Form.Field>
@@ -116,7 +114,7 @@ const CustomerForm = ({ state, setState }) => {
             type="email"
             required
             name="email"
-            value={form.data.email}
+            value={form.email}
             onChange={handleTyping("email")}
           ></input>
         </Form.Field>
@@ -125,7 +123,7 @@ const CustomerForm = ({ state, setState }) => {
           <input
             type="checkbox"
             name="SMS"
-            value={form.data.sms}
+            value={form.sms}
             onChange={handleTyping("sms")}
           ></input>
         </Form.Field>

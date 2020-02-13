@@ -27,6 +27,15 @@ const App = () => {
   useEffect(() => {
     if (state.refreshCustomers === true) {
       Server.refreshCustomers(state,setState)
+      .then( 
+        res => {
+          setState({
+              ...state,
+              customers: res.data.customers,
+              refreshCustomers:false
+          })
+        }
+      )
     }
   }, [state]);
 

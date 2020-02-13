@@ -9,13 +9,13 @@ const Alert = ({state}) => {
     <CSSTransition
       appear
       exit
-      in={state.alert ? true : false}
+      in={state ? true : false}
       timeout={5000}
       classNames="Alert"
     >
       <div style={Styles.Alert}>
         <h1>Alert!</h1>
-        <p>{state.alert}</p>
+        <p>{state}</p>
       </div>
     </CSSTransition>
   );

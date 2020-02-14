@@ -13,11 +13,10 @@ const Alert = ({state}) => {
       timeout={5000}
       classNames="Alert"
     >
-      <div className="Alert">
-        <h1>Attention.</h1>
-        <p>{props.state.text}</p>
+      <div style={Styles.Alert}>
+        <h1>Alert!</h1>
+        <p>{state}</p>
       </div>
-
     </CSSTransition>
   );
 };

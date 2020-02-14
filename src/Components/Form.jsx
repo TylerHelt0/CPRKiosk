@@ -141,7 +141,7 @@ const CustomerForm = ({ state, setState }) => {
           ></input>
         </Form.Field>
         <Form.Field>
-          <label>OPT in on SMS</label>
+          <label>I Accept SMS Updates</label>
           <input
             type="checkbox"
             name="SMS"

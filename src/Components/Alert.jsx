@@ -14,7 +14,7 @@ const Alert = props => {
       classNames="Alert"
     >
       <div className="Alert">
-        <h1>Alert!</h1>
+        <h1>Attention.</h1>
         <p>{props.state.text}</p>
       </div>
     </CSSTransition>

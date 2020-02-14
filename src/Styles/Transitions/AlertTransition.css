@@ -1,0 +1,23 @@
+.Alert-enter {
+  opacity: 0!important;
+  transform: scale(0.7)!important;
+}
+
+.Alert-enter.Alert-enter-active {
+  top: 10vh!important;
+  opacity: 1!important;
+  transform: scale(1)!important;
+  background: red!important;
+  transition: all 500ms!important;
+}
+
+.Alert-exit {
+  top: 10vh!important;
+  opacity: 1!important;
+}
+
+.Alert-exit.Alert-exit-active {
+  top: -20vh!important;
+  opacity: 0!important;
+  transition: all 1000ms!important;
+}

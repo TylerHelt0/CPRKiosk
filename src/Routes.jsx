@@ -1,18 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 //Loading other react components for use as app 'pages'
-import Checkin from "../Pages/CheckIn";
-import Landing from "../Pages/Landing";
-import ThankYou from "../Pages/ThankYou";
-import Ticket from "../Pages/Ticket";
+import Checkin from "./Components/Pages/CheckIn";
+import Landing from "./Components/Pages/Landing";
+import ThankYou from "./Components/Pages/ThankYou";
+import Ticket from "./Components/Pages/Ticket";
+
+import './Styles/Transitions/RouteTransition.css'
 
 //prop from previous component 'state' destructured for use as
 // 'state' in this Component, and passed to children
 const Routes = ({ state, setState }) => {
   const history = useHistory();
   console.log("History: ", history);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (history.location.pathname.toUpperCase() === "/THANKYOU") {
+        history.push("/");
+      }
+    }, 7500);
+  });
+
   return (
     <>
       {/* List of react components and the address bar paths that 
@@ -21,7 +32,7 @@ const Routes = ({ state, setState }) => {
         <CSSTransition
           key={history.location.key}
           timeout={600}
-          classNames="route-transition"
+          classNames={"route-transition"}
         >
           <Switch location={history.location}>
             <Route

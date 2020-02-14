@@ -4,17 +4,16 @@
 //Importing node packages that make code work
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import axios from "axios";
+import * as Server from './Services/Server'
 
 //importing styles and reusable react components
-import "./App.css";
-import Routes from "./Components/HOCs/Routes";
+import * as Styles from './Styles/App';
+import Routes from "./Routes";
 
 //Defines a React Component,  using arrow function (params) => {function body}
 const App = () => {
   //Global state of app, can be passed down to child compoenents
   // with props
-
   const initialState = {
     customers: [],
     refreshCustomers: true,
@@ -27,18 +26,16 @@ const App = () => {
   // set to true. After it runs, set refreshCustomers to false.
   useEffect(() => {
     if (state.refreshCustomers === true) {
-      axios
-        .get("https://pttech.repairshopr.com/api/v1/customers?api_key=0b248210-7705-426c-b13a-2c4877c95f21")
-        .then(res => {
-          //Creates new object identical to state, sets custoemers to response data and
-          //sets refreshCustomers to false
-          // console.log("App Refresh ",res)
+      Server.refreshCustomers(state,setState)
+      .then( 
+        res => {
           setState({
-            ...state,
-            customers: res.data.customers,
-            refreshCustomers: false
-          });
-        });
+              ...state,
+              customers: res.data.customers,
+              refreshCustomers:false
+          })
+        }
+      )
     }
   }, [state]);
 
@@ -46,7 +43,7 @@ const App = () => {
 
   //Renders html/other react components
   return (
-    <div className="App">
+    <div style={Styles.App}>
       {/* enables using address bar for different 'pages' */}
       <Router>
         {/* <Routes> = contains all possible 'pages' for address bar */}

@@ -7,12 +7,12 @@ body {
   background: #3c3f49!important;
 }
 
-.App {
+/* .App {
   text-align: center;
   min-width: 250px;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #3c3f49;
   min-height: 100vh;
   display: flex;
@@ -21,16 +21,16 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-logo {
+/* .App-logo {
   display: flex;
   width:100%;
   margin:0;
-}
+} */
 
 /* Styles for Landing.jsx */
-.Landing {
+/* .Landing {
   background-image: url('./Resources/Images/onphone.jpeg');
   background-size: cover;
 }
@@ -39,7 +39,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 .Landing .AppTOS {
   font-size: 12px;
@@ -79,14 +79,14 @@ body {
   display: flex;
 }
 
-.CheckIn .customer-form form .input {
+.CheckIn .customer-form  .input {
   display:flex;
   flex-direction: column;
   padding-top: 1em;
   text-align: left;
 }
 
-.CheckIn .customer-form form .radio {
+.CheckIn .customer-form  .radio {
   margin-top: 1em;
 }
 
@@ -161,7 +161,7 @@ body {
   transition: all 500ms;
 } */
 
-.Alert-enter {
+/* .Alert-enter {
  opacity: 0;
  transform: scale(0.7);
 }
@@ -183,38 +183,7 @@ transition: all 500ms;
   top:-20vh;
   opacity: 0;
   transition: all 1000ms;
-}
+} */
 
 
 /* Route transition */
-.route-transition-enter {
-  width:100vw;
-  position: fixed;
-  top:0;
-  left:100vw;
-  transform: scale(0.8);
-}
-
-.route-transition-enter.route-transition-enter-active {
-  position:fixed;
-  top:0;
-  left:0;
-  transform: scale(1.0);
-  transition: all 300ms ease-in;
-}
-
-.route-transition-exit {
-  width:100vw;
-  position: fixed;
-  transform: scale(1.0);
-  top:0;
-  left:0;
-}
-
-.route-transition-exit.route-transition-exit-active {
-  position: fixed;
-  top:0;
-  left:-100vw;
-  transform: scale(0.8);
-  transition: all 300ms ease-in;
-}

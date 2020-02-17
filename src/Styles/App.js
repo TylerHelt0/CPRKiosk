@@ -8,7 +8,6 @@ export const App = {
     width:"100vw",
     minHeight:"100vh",
     backgroundColor:"#3c3f49",
-    fontSize:"1rem",
     color:"white",
 }
 

@@ -23,7 +23,7 @@ const App = () => {
   const [state, setState] = useState(initialState);
 
   //Runs once when app is started, doesn't run again unless state.refreshCustomers is
-  // set to true. After it runs, set refreshCustomers to false.
+  //set to true. After it runs, set refreshCustomers to false.
   useEffect(() => {
     if (state.refreshCustomers === true) {
       Server.refreshCustomers(state,setState)

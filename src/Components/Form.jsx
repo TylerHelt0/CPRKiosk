@@ -12,6 +12,10 @@ import * as Styles from "../Styles/App";
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
 
 const CustomerForm = ({ state, setState }) => {
+  //Allows ability to redirect to different react component after axios POST,
+  // part of react-router-dom
+  const history = useHistory();
+
   // If adding new data fields to send to Strapi, also add label, and input with
   // corresponding value and onChange parameters
   // dataObj is the object sent to strappi/customers POST route
@@ -24,7 +28,7 @@ const CustomerForm = ({ state, setState }) => {
   };
 
   //Form has its own state distinct from global state. It is structured according to
-  //dataObj and is reset when form is submitted
+  //dataObj and is reset when form is submitted. Alert is shown when alert is set to a string.
   const [form, setForm] = useState(formInitialState);
   const [alert,setAlert] = useState(false);
 
@@ -36,12 +40,8 @@ const CustomerForm = ({ state, setState }) => {
     }
   }, [alert]);
 
-  //Allows ability to redirect to different react component after axios POST,
-  // part of react-router-dom
-  const history = useHistory();
-
   //Enables using react to control input fields
-  //Is callled by inputs with a text key name of dataObj and prints keystrokes into
+  //Is called by inputs with a text key name of dataObj and prints keystrokes into
   //dataObj field that corresponds to key provided
   const handleTyping = key => {
     return e => setForm({ ...form, [key]:e.target.value});
@@ -53,21 +53,26 @@ const CustomerForm = ({ state, setState }) => {
   const handleSumbit = event => {
     event.preventDefault();
 
+    //Check if customer exists in already downloaded customers list
+    const customer = state.customers.find( (cust) => {
+      return cust.email === form.email
+    })
+    if (typeof customer === 'object') { 
+      console.log("Customer "+customer.id+" exists on server")
+      return setAlert("Email " + customer.email +" already exists on server.")
+    }
+
+    //If not, make new customer, reset form. 
     Server.newCustomer(form)
-    .then( res => {
-      console.log("Form response: ", res)
+    .then( response => {
+      console.log("Form response: ", response)
       setForm(formInitialState);
       setState({...state,refreshCustomers:true})
       history.push("/ThankYou");
     })
-    .catch(error => {
-      if (error.response.status === 422) {
-        Server.refreshCustomersByEmail(form.email)
-        .then( res => {
-          console.log("Customer ", res.data.customers[0].id, " exists on server");
-          setAlert("Email " + res.data.customers[0].email + " exists.")
-        })
-      } else {
+    .catch( error => {
+      //Handle problems
+      if (error.response.status !== 422) {
         console.log("Form error: ", error)
         setAlert("Error logged to console")
       }
@@ -142,41 +147,5 @@ const CustomerForm = ({ state, setState }) => {
     </>
   );
 };
-
-/* <div className='customer-form'>
-    <form onSubmit={handleSumbit}>
-        <div className='input'>
-            <label>First name: </label>
-            <input type="text" required name="FirstName" value={form.data.FirstName} onChange={handleTyping('FirstName')}></input>
-        </div>
-        <div className='input'>
-            <label>Last name:  </label>
-            <input type="text" required name="LastName" value={form.data.LastName} onChange={handleTyping('LastName')}></input>
-        </div>
-        <div className='input'>
-            <label>Phone Number: </label>
-            <input type='number' required name='PhoneNumber' value={form.data.PhoneNumber} onChange={handleTyping('PhoneNumber')}></input>
-        </div>
-        <div className='input'>
-            <label>Email: </label>
-            <input type='email' required name='Email' value={form.data.Email} onChange={handleTyping('Email')}></input>
-        </div>
-        <div className='radio'>
-            <input type='checkbox' />  
-            <label> I agree to <TOS state={state} setState={setState}/></label>                 
-        </div>
-        <div className='input'>
-            <p>Signature: </p>
-            <SignaturePad
-                canvasProps={{
-                    className: "signature"
-                }}
-            />
-        </div>
-        <div>
-            <input type="submit" value="Submit"></input>
-        </div>
-    </form>
-</div> */
 
 export default CustomerForm;

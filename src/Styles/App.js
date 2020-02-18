@@ -28,6 +28,11 @@ export const Landing = {
     minHeight:"100vh"
 }
 
+export const LandingButtons = {
+    display:'flex',
+    justifyContent:'space-around'
+}
+
 export const CheckIn = {
     backgroundImage: `url(${CheckInBackground})`,
     backgroundSize: "cover",

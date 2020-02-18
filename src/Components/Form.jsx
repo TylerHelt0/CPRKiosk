@@ -44,7 +44,12 @@ const CustomerForm = ({ state, setState }) => {
   //Is called by inputs with a text key name of dataObj and prints keystrokes into
   //dataObj field that corresponds to key provided
   const handleTyping = key => {
-    return e => setForm({ ...form, [key]:e.target.value});
+    return e => {
+      if (e.target.type === 'checkbox') {
+        return setForm({...form,[key]:e.target.checked})
+      }
+      setForm({ ...form, [key]:e.target.value});
+    }
   };
 
   //event.preventSefault() stops form from reloading before data is sent

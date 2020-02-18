@@ -5,7 +5,6 @@ import CheckinButton from "../../Resources/Images/checkin.png";
 import Logo from "../../Resources/Images/thereal.svg";
 import Legal from "../Legal";
 import * as Styles from '../../Styles/App'
-import "../../Resources/Fonts/Avenir-Heavy.ttf";
 
 //NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
 //LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!

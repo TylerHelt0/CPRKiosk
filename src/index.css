@@ -18,3 +18,11 @@ code {
   font-size: calc(10px + 2vmin);
   font-family: 'Roboto', sans-serif;
 }
+
+.CheckIn .form .tos {
+  color:#4183c4;
+}
+
+.CheckIn .form .tos:hover {
+  color: #346597
+}

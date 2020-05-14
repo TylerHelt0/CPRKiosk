@@ -72,7 +72,7 @@ export const Alert = {
     padding:"1em",
     borderRadius: "1em",
     opacity: "0",
-    position: "absolute",
+    position: "fixed",
     top:"-20vh",
     zIndex: "1",
 }

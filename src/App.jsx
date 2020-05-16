@@ -1,6 +1,3 @@
-//NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
-//LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
-
 //Importing node packages that make code work
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";

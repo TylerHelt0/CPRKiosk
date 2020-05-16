@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 
 import Logo from "../../Resources/Images/thereal.svg";
 
-//NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
-//LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
-
 const ThankYou = () => {
 
   return (

@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import React, { useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 //Loading other react components for use as app 'pages'
-import Checkin from "./Components/Pages/CheckIn";
-import Devices from "./Components/Pages/Devices"
-import Landing from "./Components/Pages/Landing";
-import Lookup from "./Components/Pages/Lookup";
-import ThankYou from "./Components/Pages/ThankYou";
+import Checkin from './Components/Pages/CheckIn';
+import Devices from './Components/Pages/Devices';
+import Landing from './Components/Pages/Landing';
+import Lookup from './Components/Pages/Lookup';
+import ThankYou from './Components/Pages/ThankYou';
 
-import "./Styles/Transitions/RouteTransition.css";
-
-import * as Server from "./Services/Server";
+import './Styles/Transitions/RouteTransition.css';
 
 //prop from previous component 'state' destructured for use as
 // 'state' in this Component, and passed to children
 const Routes = ({ state, setState }) => {
     const history = useHistory();
-    console.log("History: ", history);
+    console.log('History: ', history);
 
     useEffect(() => {
         setTimeout(() => {
-            if (history.location.pathname.toUpperCase() === "/THANKYOU") {
-                history.push("/");
+            if (history.location.pathname.toUpperCase() === '/THANKYOU') {
+                history.push('/');
             }
         }, 7500);
     });
@@ -35,36 +33,36 @@ const Routes = ({ state, setState }) => {
                 <CSSTransition
                     key={history.location.key}
                     timeout={600}
-                    classNames={"route-transition"}
+                    classNames={'route-transition'}
                 >
                     <Switch location={history.location}>
                         <Route
                             exact
-                            path="/"
+                            path='/'
                             render={() => (
                                 <Landing state={state} setState={setState} />
                             )}
                         ></Route>
                         <Route
-                            path="/checkIn"
+                            path='/checkIn'
                             render={() => (
                                 <Checkin state={state} setState={setState} />
                             )}
                         ></Route>
                         <Route
-                            path="/lookup/devices"
+                            path='/lookup/devices'
                             render={() => (
                                 <Devices state={state} setState={setState} />
                             )}
                         ></Route>
                         <Route
-                            path="/lookup"
+                            path='/lookup'
                             render={() => (
                                 <Lookup state={state} setState={setState} />
                             )}
                         ></Route>
                         <Route
-                            path="/thankYou"
+                            path='/thankYou'
                             render={() => <ThankYou />}
                         ></Route>
                     </Switch>

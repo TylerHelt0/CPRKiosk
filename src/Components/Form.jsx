@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 
-import * as Server from "../Services/Server";
-
 import Alert from "./Alert";
 import TOS from "./TOS";
+
 import * as Styles from "../Styles/App";
 
-//NOTICE: THIS APP IS NOT TO BE SOLD OR LICENSED AND IS STRICTLY FOR
-//LEARNING PURPOSES. THIS APP IS NOT OWNED BY OR AFFILIATED WITH CPR!
-
+import * as Server from "../Services/Server";
 const CustomerForm = ({ state, setState }) => {
     //Allows ability to redirect to different react component after axios POST,
     // part of react-router-dom

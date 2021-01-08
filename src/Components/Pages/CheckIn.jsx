@@ -18,7 +18,7 @@ const Checkin = ({ state, setState }) => {
                             alt="company logo"
                         />
                     </Link>
-                    <h2>Please enter your information to begin checkin, and don't fucking talk to me until then.</h2>
+                    <h2>Please enter your information to begin checkin.</h2>
                     <Form state={state} setState={setState} />
                 </div>
             </div>

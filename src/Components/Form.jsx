@@ -87,7 +87,7 @@ const CustomerForm = ({ state, setState }) => {
     };
 
     return (
-        <>
+        <React.Fragment>
             <Alert state={alert} />
             <Form inverted={true} onSubmit={handleSumbit}>
                 <Form.Field style={Styles.FormInputText}>
@@ -151,7 +151,7 @@ const CustomerForm = ({ state, setState }) => {
                 </Form.Field>
                 <Button type="submit">Submit</Button>
             </Form>
-        </>
+        </React.Fragment>
     );
 };
 

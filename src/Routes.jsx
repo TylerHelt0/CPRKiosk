@@ -25,55 +25,83 @@ const Routes = ({ state, setState }) => {
         }, 7500);
     });
 
+    const routes = [
+        { path: '/', name: 'Landing', Component: Landing},
+        { path: '/checkIn', name: 'Checkin', Component: Checkin},
+        { path: '/lookup/devices', name: 'Devices', Component: Devices},
+        { path: '/lookup', name: 'Lookup', Component: Lookup},
+        { path: '/thankYou', name: 'ThankYou', Component: ThankYou}
+    ]
+
     return (
-        <>
-            {/* List of react components and the address bar paths that 
-        render them */}
-            <TransitionGroup appear enter exit component={null}>
+        <React.Fragment>
+            {routes.map(({ path, Component }) => (
+            <Route key={path} exact path={path}>
+              {({ match }) => (
                 <CSSTransition
-                    key={history.location.key}
-                    timeout={600}
-                    classNames={'route-transition'}
+                  in={match != null}
+                  timeout={300}
+                  classNames="route-transition"
+                  unmountOnExit
                 >
-                    <Switch location={history.location}>
-                        <Route
-                            exact
-                            path='/'
-                            render={() => (
-                                <Landing state={state} setState={setState} />
-                            )}
-                        ></Route>
-                        <Route
-                            path='/checkIn'
-                            render={() => (
-                                <Checkin state={state} setState={setState} />
-                            )}
-                        ></Route>
-                        <Route
-                            path='/lookup/devices'
-                            render={() => (
-                                <Devices state={state} setState={setState} />
-                            )}
-                        ></Route>
-                        <Route
-                            path='/lookup'
-                            render={() => (
-                                <Lookup state={state} setState={setState} />
-                            )}
-                        ></Route>
-                        <Route
-                            path='/thankYou'
-                            render={() => <ThankYou />}
-                        ></Route>
-                    </Switch>
+                  <div className="page">
+                    <Component state={state} setState={setState}/>
+                  </div>
                 </CSSTransition>
-            </TransitionGroup>
-        </>
+              )}
+            </Route>
+          ))}
+        </React.Fragment>
     );
 };
+
 
 // When react components are rendered by other components, they are used like html
 // elements e.g. Landing is <Landing /> CheckIn is <CheckIn />. This will render
 // the entire react component at the tags CaretPosition.
 
 export default Routes;
+
+        // <React.Fragment>
+        //     {/* List of react components and the address bar paths that 
+        // render them */}
+        //     <TransitionGroup appear enter exit component={null}>
+        //         <CSSTransition
+        //             key={history.location.key}
+        //             timeout={600}
+        //             classNames={'route-transition'}
+        //         >
+        //             <Switch location={history.location}>
+        //                 <Route
+        //                     exact
+        //                     path='/'
+        //                     render={() => (
+        //                         <Landing state={state} setState={setState} />
+        //                     )}
+        //                 ></Route>
+        //                 <Route
+        //                     path='/checkIn'
+        //                     render={() => (
+        //                         <Checkin state={state} setState={setState} />
+        //                     )}
+        //                 ></Route>
+        //                 <Route
+        //                     path='/lookup/devices'
+        //                     render={() => (
+        //                         <Devices state={state} setState={setState} />
+        //                     )}
+        //                 ></Route>
+        //                 <Route
+        //                     path='/lookup'
+        //                     render={() => (
+        //                         <Lookup state={state} setState={setState} />
+        //                     )}
+        //                 ></Route>
+        //                 <Route
+        //                     path='/thankYou'
+        //                     render={() => <ThankYou />}
+        //                 ></Route>
+        //             </Switch>
+        //         </CSSTransition>
+        //     </TransitionGroup>
+        // </React.Fragment>
